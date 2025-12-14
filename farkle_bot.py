@@ -3,29 +3,8 @@ from discord.ext import commands
 import random
 from collections import Counter
 import os
-from flask import Flask
-from threading import Thread
 
 # TODO: Show scores
-
-# ----- Keep up -----
-app = Flask('')
-
-
-@app.route('/')
-def home():
-    return "Farkle bot is awake!"
-
-
-def run():
-    app.run(host='0.0.0.0', port=5000)
-
-
-def keep_alive():
-    t = Thread(target=run)
-    t.start()
-
-
 # ----- Bot Setup -----
 intents = discord.Intents.default()
 intents.message_content = True
@@ -353,5 +332,4 @@ async def stop(ctx):
 
 
 # ----- Run Bot -----
-keep_alive()
 bot.run(os.getenv("DISCORD_TOKEN"))
