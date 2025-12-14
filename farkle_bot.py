@@ -21,12 +21,10 @@ DICE_EMOJIS = {1: "⚀", 2: "⚁", 3: "⚂", 4: "⚃", 5: "⚄", 6: "⚅"}
 def is_scoring_dice(dice):
     counts = Counter(dice)
     if len(dice) == 6:
-        ones = 0
         twos = 0
         threes = 0
         fours = 0
-        fives = 0
-        sixes = 0
+        straight = 0
         for num, count in counts.items():
             if count == 4:
                 fours += 1
@@ -34,13 +32,15 @@ def is_scoring_dice(dice):
                 threes += 1
             if count == 2:
                 twos += 1
+            if count == 1:
+                straight += 1
         if threes == 2:
             return (True, 2500)
         if fours == 1 and twos == 1:
             return (True, 1500)
         if twos == 3:
             return (True, 1500)
-        if ones == 1 and twos == 1 and threes == 1 and fours == 1 and fives == 1 and sixes == 1:
+        if straight == 6:
             return (True, 1500)
     score = 0
     bool = True
